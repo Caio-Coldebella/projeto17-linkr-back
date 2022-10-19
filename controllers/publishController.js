@@ -9,9 +9,7 @@ async function postPublish(req, res) {
     if (!url.match(validationURL)) {
       return res.status(422).send("URL invalida!");
     }
-    await publishRepository.createTableLikes();
-    const idtable = await publishRepository.idTable();
-    await publishRepository.postPublishPostByUserId(userId, url, complement, idtable);
+    await publishRepository.postPublishPostByUserId(userId, url, complement);
     res.sendStatus(200);
   } catch (e) {
     console.log(e);
