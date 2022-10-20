@@ -26,10 +26,14 @@ function badRequest(res){
 
 }
 
+function noContentResponse(res){
+    return res.sendStatus(STATUS_CODE.NOT_CONTENT);
+}
 
 export { 
     notImplemented,
     okResponse,
     serverError,
-    badRequest
+    badRequest,
+    noContentResponse
 };

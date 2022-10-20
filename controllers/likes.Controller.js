@@ -26,10 +26,23 @@ async function postLikes(req, res) {
 
 async function deleteLikes(req, res, next) {
 
-    return notImplemented(res);
+    const { id: userId } = res.locals.user[0];
+    const postId = res.locals.postId;
 
-    next();
+    try {
 
+        const response = await repository.deletePostLike(postId, userId);
+
+        if (response.rowCount) {
+            return helper.noContentResponse(res);
+        }
+
+        return helper.badRequest(res);
+
+
+    } catch (error) {
+        return helper.serverError(res, error);
+    }
 }
 
 export { postLikes, deleteLikes };
