@@ -9,4 +9,12 @@ async function postLikes(req, res, next) {
 
 }
 
-export { postLikes };
+async function deleteLikes(req, res, next) {
+
+    return notImplemented(res);
+    
+    next();
+
+}
+
+export { postLikes, deleteLikes };
