@@ -6,6 +6,6 @@ import publishSchema from "../schemas/publishSchema.js";
 
 const router = Router();
 
-router.post("/publish", valitationToken,valitationSchema(publishSchema), postPublish);
+router.post("/publish", valitationToken, valitationSchema(publishSchema), postPublish);
 
 export default router;

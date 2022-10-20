@@ -1,6 +1,6 @@
 import express, { json } from "express";
 import cors from "cors";
-import router from "../routers/publishRouter.js";
+import router from "../routers/index.js";
 import dotenv from "dotenv";
 dotenv.config();
 
