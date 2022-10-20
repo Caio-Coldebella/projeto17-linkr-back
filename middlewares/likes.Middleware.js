@@ -15,7 +15,8 @@ async function likes(req, res, next) {
         if(!confirmPost.rowCount){
             helper.notFound(res);
         }
-
+        
+        res.locals.postId = postId;
         next();
     } catch (error) {
         return helper.serverError(res, error);

@@ -3,8 +3,33 @@ import { STATUS_CODE } from '../enums/statusCode.Enum.js';
 
 function notImplemented(res) {
 
-    //const { id } = res.locals.user;
     return res.sendStatus(STATUS_CODE.NOT_IMPLEMENTED);
 }
 
-export { notImplemented };
+function okResponse(res) {
+
+    return res.sendStatus(STATUS_CODE.OK);
+
+}
+
+
+function serverError(res, error) {
+
+    console.error(error);
+    return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+
+}
+
+function badRequest(res){
+
+    return res.sendStatus(STATUS_CODE.BAD_REQUEST);
+
+}
+
+
+export { 
+    notImplemented,
+    okResponse,
+    serverError,
+    badRequest
+};
