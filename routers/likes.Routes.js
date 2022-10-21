@@ -18,4 +18,10 @@ router.delete('/like/:postId',
 );
 
 
+router.get('/like/:postId',
+    middleware.likes,
+    (req, res) => {}
+)
+
+
 export default router;
