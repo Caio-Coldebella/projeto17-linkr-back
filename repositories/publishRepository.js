@@ -7,5 +7,9 @@ async function postPublishPostByUserId(userId, link, content) {
   );
 }
 
-const publishRepository = { postPublishPostByUserId} ;
+async function getPublish(){
+  return db.query('SELECT posts.content, posts.link, users.username,users."pictureUrl" FROM posts JOIN users ON posts."userId"=users.id');
+}
+
+const publishRepository = { postPublishPostByUserId, getPublish} ;
 export default publishRepository;

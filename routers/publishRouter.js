@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { postPublish } from "../controllers/publishController.js";
-import valitationSchema from "../middlewares/valitationSchema.js";
-import valitationToken from "../middlewares/valitationToken.js";
+import { getPublish, postPublish } from "../controllers/publishController.js";
+import validationSchema from "../middlewares/validationSchema.js";
+import validationToken from "../middlewares/validationToken.js";
 import publishSchema from "../schemas/publishSchema.js";
 
 const router = Router();
 
-router.post("/publish", valitationToken, valitationSchema(publishSchema), postPublish);
+router.post("/publish", validationToken, validationSchema(publishSchema), postPublish);
+router.get('/publish',validationToken, getPublish);
 
 export default router;

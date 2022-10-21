@@ -1,6 +1,6 @@
 import db from "../database/database.js";
 
-async function valitationToken(req, res, next) {
+async function validationToken(req, res, next) {
   const token = req.headers.authorization?.replace("Bearer ", "");
 
   try {
@@ -31,4 +31,4 @@ async function valitationToken(req, res, next) {
   }
 }
 
-export default valitationToken;
+export default validationToken;
