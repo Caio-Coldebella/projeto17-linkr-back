@@ -45,4 +45,31 @@ async function deleteLikes(req, res, next) {
     }
 }
 
-export { postLikes, deleteLikes };
+async function getLikesUsers(req, res) {
+
+
+    const postId = res.locals.postId;
+
+    try {
+
+        const response = await repository.selectLikesUsers(postId);
+
+        if (response.rowCount) {
+            return helper.okResponseBody(res, response.rows.map(res => res.username));
+        }
+
+        return helper.badRequest(res);
+
+    } catch (error) {
+        return helper.serverError(res, error);
+    }
+
+}
+
+
+
+export {
+    postLikes,
+    deleteLikes,
+    getLikesUsers
+};

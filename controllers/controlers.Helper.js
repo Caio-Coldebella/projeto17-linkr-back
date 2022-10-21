@@ -12,6 +12,12 @@ function okResponse(res) {
 
 }
 
+function okResponseBody(res, body) {
+
+    return res.status(STATUS_CODE.OK).send(body);
+
+}
+
 
 function serverError(res, error) {
 
@@ -20,19 +26,20 @@ function serverError(res, error) {
 
 }
 
-function badRequest(res){
+function badRequest(res) {
 
     return res.sendStatus(STATUS_CODE.BAD_REQUEST);
 
 }
 
-function noContentResponse(res){
+function noContentResponse(res) {
     return res.sendStatus(STATUS_CODE.NOT_CONTENT);
 }
 
-export { 
+export {
     notImplemented,
     okResponse,
+    okResponseBody,
     serverError,
     badRequest,
     noContentResponse

@@ -18,9 +18,9 @@ router.delete('/like/:postId',
 );
 
 
-router.get('/like/:postId',
+router.get('/like/:postId/users',
     middleware.likes,
-    (req, res) => {}
+    controllers.getLikesUsers
 )
 
 

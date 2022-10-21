@@ -29,7 +29,19 @@ async function deletePostLike(postId, userId) {
                   WHERE
                     "postId" = $1
                     AND "userId" = $2;`,
-                    [postId, userId]);
+    [postId, userId]);
+
+}
+
+async function selectLikesUsers(postId) {
+
+  return db.query(`SELECT
+                    users.username
+                  from
+                    users
+                    INNER JOIN "likesUsers" as lu ON  lu."userId" = users.id
+                  WHERE
+                    lu."postId" = $1;`, [postId]);
 
 }
 
@@ -37,5 +49,6 @@ async function deletePostLike(postId, userId) {
 export {
   selectPost,
   insertPostLike,
-  deletePostLike
+  deletePostLike,
+  selectLikesUsers
 };
