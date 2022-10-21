@@ -65,11 +65,32 @@ async function getLikesUsers(req, res) {
     }
 
 }
+async function getLikesCount(req, res) {
+
+
+    const postId = res.locals.postId;
+
+    try {
+
+        const response = await repository.selectCountLike(postId);
+
+        if (response.rowCount) {
+            return helper.okResponseBody(res, response.rows[0].count);
+        }
+
+        return helper.badRequest(res);
+
+    } catch (error) {
+        return helper.serverError(res, error);
+    }
+
+}
 
 
 
 export {
     postLikes,
     deleteLikes,
-    getLikesUsers
+    getLikesUsers,
+    getLikesCount
 };

@@ -21,6 +21,11 @@ router.delete('/like/:postId',
 router.get('/like/:postId/users',
     middleware.likes,
     controllers.getLikesUsers
+);
+
+router.get('/like/:postId/count',
+    middleware.likes,
+    controllers.getLikesCount
 )
 
 

@@ -45,10 +45,22 @@ async function selectLikesUsers(postId) {
 
 }
 
+async function selectCountLike(postId) {
+
+  return db.query(`SELECT
+                     COUNT(lu.id)
+                   FROM
+                     "likesUsers" as lu
+                   WHERE
+                     lu."postId" = $1;`,[postId]);
+
+}
+
 
 export {
   selectPost,
   insertPostLike,
   deletePostLike,
-  selectLikesUsers
+  selectLikesUsers,
+  selectCountLike
 };
