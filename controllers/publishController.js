@@ -1,6 +1,6 @@
 import publishRepository from "../repositories/publishRepository.js";
 
-async function postPublish(req, res) {
+export async function postPublish(req, res) {
   const { url, complement } = req.body;
   const userId = res.locals.user[0].id;
   try {
@@ -17,4 +17,12 @@ async function postPublish(req, res) {
   }
 }
 
-export { postPublish };
+export async function getPublish(req,res){
+  try {
+    const posts = await publishRepository.getPublish();
+    res.send(posts.rows);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
