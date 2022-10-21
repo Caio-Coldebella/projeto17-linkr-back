@@ -5,13 +5,13 @@ import validationToken from '../middlewares/valitationToken.js';
 
 const router = Router();
 
-router.post('/post/:postId/like',
+router.post('/like/:postId',
     validationToken,
     middleware.likes,
     controllers.postLikes
 );
 
-router.delete('/post/:postId/like',
+router.delete('/like/:postId',
     validationToken,
     middleware.likes,
     controllers.deleteLikes
