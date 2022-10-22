@@ -24,7 +24,7 @@ async function postLikes(req, res) {
 
 }
 
-async function deleteLikes(req, res, next) {
+async function deleteLikes(req, res) {
 
     const { id: userId } = res.locals.user[0];
     const postId = res.locals.postId;
