@@ -2,20 +2,9 @@ import pg from "pg";
 import dotenv from "dotenv";
 dotenv.config();
 
-const user = 'postgres';
-  const password = 'HTSIO7';
-  const host = 'localhost';
-  const port = ' 5432';
-  const database = 'linkr';
-
 const { Pool } = pg;
 const connectDatabase = {
-  //connectionString: process.env.DATABASE_URL,
-    user,
-    password,
-    host,
-    port,
-    database
+  connectionString: process.env.DATABASE_URL,
 };
 
 //O MODE é PROD para apenas quando fizer o deploy no heroku, enquanto o projeto estiver em produção o MODE é DEV

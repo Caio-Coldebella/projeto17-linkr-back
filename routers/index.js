@@ -1,7 +1,7 @@
 import { Router } from "express";
 import publishRouter from "./publishRouter.js";
 import likesRoutes from './likes.Routes.js';
-import authRoutes from './auth.Routes.js';
+import authRoutes from "./auth.Routes.js";
 
 const router = Router();
 
