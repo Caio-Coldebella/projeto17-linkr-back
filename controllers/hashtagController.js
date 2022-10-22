@@ -1,5 +1,5 @@
-import {findHashtag} from '../repositories/hashtagRepository;'
-import {findHashtagId} from '../repositories/hashtagRepository;'
+import {findHashtag} from '../repositories/hashtagRepository.js;'
+import {findHashtagId} from '../repositories/hashtagRepository.js;'
 
 export async function findHashtagController(req, res){
     try {
