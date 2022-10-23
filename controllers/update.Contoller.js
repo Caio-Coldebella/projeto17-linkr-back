@@ -5,11 +5,11 @@ async function updatePost(req, res) {
 
     const { id: userId } = res.locals.user[0];
     const content = res.locals.content;
-    const postId = res.locals.postId;
+    const id = res.locals.id;
 
     try {
 
-        const response = await repository.insertPostLike(postId, userId, content);
+        const response = await repository.updatePost(id, userId, content);
 
         if (response.rowCount) {
             return helper.okResponse(res);
