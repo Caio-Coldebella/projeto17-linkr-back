@@ -39,10 +39,8 @@ async function signIn(req, res) {
 
         if ( isValid && passwordIsValid ) {
             const token = uuid();
-
             await db.query(`INSERT INTO sessions ("userId", token) VALUES (${isValid.id}, '${token}');`)
-
-            res.status(200).send(token)
+            res.status(200).send(`Bearer ${token}`)
         } else {
             res.stauts(401).send("email ou senha incorretos")
         }
