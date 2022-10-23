@@ -1,5 +1,5 @@
 import * as helper from './middleware.Helper.js';
-import * as repository from '../repositories/likes.Repository.js'
+import * as repository from '../repositories/update.Reposity.js';
 
 
 
@@ -9,6 +9,8 @@ async function likes(req, res, next) {
     const { content } = req.body;
 
     try {
+
+
 
         const confirmPost = await repository.selectPost(postId);
 
