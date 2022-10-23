@@ -3,14 +3,16 @@ import * as repository from '../repositories/update.Reposity.js';
 
 
 
-async function likes(req, res, next) {
+async function validPost(req, res, next) {
 
     const { postId } = req.params;
     const { content } = req.body;
 
     try {
 
-
+        if (!content) {
+            helper.badRequest(res);
+        }
 
         const confirmPost = await repository.selectPost(postId);
 
@@ -27,4 +29,4 @@ async function likes(req, res, next) {
 
 }
 
-export { likes };
+export { validPost };
