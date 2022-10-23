@@ -9,7 +9,7 @@ async function postPublishPostByUserId(userId, link, content) {
 }
 
 async function getPublish(){
-  return db.query(`SELECT ${TABLES_NAMES.POSTS}."userId",${TABLES_NAMES.POSTS}.content, ${TABLES_NAMES.POSTS}.link, ${TABLES_NAMES.USERS}.username,${TABLES_NAMES.USERS}."pictureUrl" FROM ${TABLES_NAMES.POSTS} JOIN ${TABLES_NAMES.USERS} ON ${TABLES_NAMES.POSTS}."userId"=${TABLES_NAMES.USERS}.id ORDER BY ${TABLES_NAMES.POSTS}.id DESC LIMIT 20`);
+  return db.query(`SELECT ${TABLES_NAMES.POSTS}.id, ${TABLES_NAMES.POSTS}."userId",${TABLES_NAMES.POSTS}.content, ${TABLES_NAMES.POSTS}.link, ${TABLES_NAMES.USERS}.username,${TABLES_NAMES.USERS}."pictureUrl" FROM ${TABLES_NAMES.POSTS} JOIN ${TABLES_NAMES.USERS} ON ${TABLES_NAMES.POSTS}."userId"=${TABLES_NAMES.USERS}.id ORDER BY ${TABLES_NAMES.POSTS}.id DESC LIMIT 20`);
 }
 
 async function getPublishById(id){
