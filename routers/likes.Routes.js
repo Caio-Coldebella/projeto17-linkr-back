@@ -18,6 +18,13 @@ router.delete('/like/:postId',
 );
 
 
+router.get('/like/:postId/me',
+    validationToken,
+    middleware.likes,
+    controllers.getLikeMe
+);
+
+
 router.get('/like/:postId/users',
     middleware.likes,
     controllers.getLikesUsers
