@@ -1,4 +1,3 @@
-import { STATUS_CODE } from "../enums/statusCode.Enum.js";
 import publishRepository from "../repositories/publishRepository.js";
 
 export async function postPublish(req, res) {
@@ -21,21 +20,6 @@ export async function postPublish(req, res) {
 export async function getPublish(req,res){
   try {
     const posts = await publishRepository.getPublish();
-    res.send(posts.rows);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-}
-
-export async function getPublishById(req,res){
-  const id = parseInt(req.params.id);
-  if(isNaN(id)){
-    res.sendStatus(STATUS_CODE.BAD_REQUEST)
-    return;
-  }
-  try {
-    const posts = await publishRepository.getPublishById(id);
     res.send(posts.rows);
   } catch (error) {
     console.log(error);
