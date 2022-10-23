@@ -1,5 +1,6 @@
 import { STATUS_CODE } from "../enums/statusCode.Enum.js";
 import publishRepository from "../repositories/publishRepository.js";
+import { findHashtagByName, createPostWithaHashtag, createNewHashtag } from "../repositories/hashtagRepository.js";
 
 export async function postPublish(req, res) {
   const { url, complement } = req.body;
@@ -41,4 +42,8 @@ export async function getPublishById(req,res){
     console.log(error);
     res.sendStatus(500);
   }
+}
+
+export async function updatePublish(req,res){
+
 }
