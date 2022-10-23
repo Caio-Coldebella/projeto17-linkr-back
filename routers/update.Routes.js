@@ -6,7 +6,8 @@ const router = Router();
 
 router.update('/post/:id',
     validationToken,
-    middleware.validPost
+    middleware.validPost,
+    
 );
 
 export default router;
