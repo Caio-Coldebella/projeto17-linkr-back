@@ -1,6 +1,7 @@
 import * as helper from './controlers.Helper.js';
 import * as repository from '../repositories/likes.Repository.js'
 
+
 async function postLikes(req, res) {
 
 
@@ -24,7 +25,8 @@ async function postLikes(req, res) {
 
 }
 
-async function deleteLikes(req, res, next) {
+async function deleteLikes(req, res) {
+
 
     const { id: userId } = res.locals.user[0];
     const postId = res.locals.postId;
@@ -43,6 +45,28 @@ async function deleteLikes(req, res, next) {
     } catch (error) {
         return helper.serverError(res, error);
     }
+}
+
+async function getLikeMe(req, res) {
+
+    const { id: userId } = res.locals.user[0];
+    const postId = res.locals.postId;
+
+    try {
+
+        const response = await repository.selectLikeMe(postId, userId);
+
+        if (response.rowCount) {
+            return helper.okResponseBody(res, true);
+        }
+
+        return helper.okResponseBody(res, false);
+
+
+    } catch (error) {
+        return helper.serverError(res, error);
+    }
+
 }
 
 async function getLikesUsers(req, res) {
@@ -91,6 +115,7 @@ async function getLikesCount(req, res) {
 export {
     postLikes,
     deleteLikes,
+    getLikeMe,
     getLikesUsers,
     getLikesCount
 };

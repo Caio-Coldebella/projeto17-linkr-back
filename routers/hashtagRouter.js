@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import { findHashtagController, findHashtagIdController } from '../controllers/hashtagController.js';
 
 const hashtagRouter = Router();

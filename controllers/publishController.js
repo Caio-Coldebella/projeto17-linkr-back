@@ -1,4 +1,3 @@
-import { STATUS_CODE } from "../enums/statusCode.Enum.js";
 import publishRepository from "../repositories/publishRepository.js";
 
 export async function postPublish(req, res) {
@@ -19,9 +18,10 @@ export async function postPublish(req, res) {
 }
 
 export async function getPublish(req,res){
+  const user = res.locals.user;
   try {
     const posts = await publishRepository.getPublish();
-    res.send(posts.rows);
+    res.send({posts: posts.rows, user: user});
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

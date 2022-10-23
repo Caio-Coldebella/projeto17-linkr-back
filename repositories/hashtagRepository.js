@@ -1,5 +1,4 @@
 import Sqlstrng from 'sqlstring';
-
 import db from '../database/database.js';
 
 async function findHashtag() {
@@ -12,3 +11,4 @@ async function findHashtagId(){
 }
 
 export { findHashtag, findHashtagId };
+
