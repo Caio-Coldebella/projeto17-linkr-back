@@ -1,12 +1,14 @@
 import Sqlstrng from 'sqlstring';
+import db from '../database/database.js';
 
-import connectDatabase from '../database/database.js';
-
-export async function findHashtag() {
-    const find = connectDatabase.query(`SELECT * FROM topicsPosts;`); 
+async function findHashtag() {
+    const find = db.query(`SELECT * FROM topicsPosts;`); 
     return find;
 }
 
-export async function findHashtagId(){
-    return connectDatabase.query(`SELECT *from topicsPosts WHERE id ${Sqlstrng.escape(id)}`);
+async function findHashtagId(){
+    return db.query(`SELECT *from topicsPosts WHERE id ${Sqlstrng.escape(id)}`);
 }
+
+export { findHashtag, findHashtagId };
+

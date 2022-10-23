@@ -1,6 +1,6 @@
-import {findHashtag, findHashtagId} from "../repositories/hashtagRepository.js";
+import { findHashtag, findHashtagId } from '../repositories/hashtagRepository.js';
 
-export async function findHashtagController(req, res){
+async function findHashtagController(req, res){
     try {
         const {rows: hashtagId} = await findHashtag();
 
@@ -11,14 +11,14 @@ export async function findHashtagController(req, res){
     }
 }
 
-export async function findHashtagIdController(req,res){
+async function findHashtagIdController(req,res){
     const {id} = req.params;
 
     try {
         
         const checkHashtag = await findHashtagId();
         
-        if(checkHashtag.rowCOunt ===0){
+        if(checkHashtag.rowCount === 0){
             return res.sendStatus(404);
         }
 
@@ -27,3 +27,4 @@ export async function findHashtagIdController(req,res){
     }
 }
 
+export { findHashtagController, findHashtagIdController }
