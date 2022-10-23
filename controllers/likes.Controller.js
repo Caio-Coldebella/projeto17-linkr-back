@@ -1,6 +1,6 @@
 import * as helper from './controlers.Helper.js';
 import * as repository from '../repositories/likes.Repository.js'
-import { compareSync } from 'bcrypt';
+
 
 async function postLikes(req, res) {
 

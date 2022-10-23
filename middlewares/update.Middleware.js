@@ -21,6 +21,7 @@ async function validPost(req, res, next) {
         }
 
         res.locals.postId = postId;
+        res.locals.content = content;
         next();
     } catch (error) {
         return helper.serverError(res, error);
