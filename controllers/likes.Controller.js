@@ -60,7 +60,7 @@ async function getLikeMe(req, res) {
             return helper.okResponseBody(res, true);
         }
 
-        return helper.badRequest(res);
+        return helper.okResponseBody(res, false);
 
 
     } catch (error) {
