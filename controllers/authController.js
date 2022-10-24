@@ -41,11 +41,11 @@ async function signIn(req, res) {
             let verify = (await db.query(`SELECT * FROM sessions WHERE "userId" = ${isValid.id};`)).rows;
 
             if (verify.length === 0) {
-                await db.query(`INSERT INTO sessions ("userId", token) VALUES (${isValid.id}, 'Bearer ${token}');`)
+                await db.query(`INSERT INTO sessions ("userId", token) VALUES (${isValid.id}, '${token}');`)
             } else {
                 await db.query(`DELETE FROM sessions WHERE "userId" = ${isValid.id}`)
 
-                await db.query(`INSERT INTO sessions ("userId", token) VALUES (${isValid.id}, 'Bearer ${token}');`)
+                await db.query(`INSERT INTO sessions ("userId", token) VALUES (${isValid.id}, '${token}');`)
             }
 
             res.status(200).send(token)
