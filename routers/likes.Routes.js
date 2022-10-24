@@ -1,25 +1,22 @@
 import { Router } from "express";
 import * as middleware from '../middlewares/likes.Middleware.js';
 import * as controllers from '../controllers/likes.Controller.js';
-import validationToken from '../middlewares/validationToken.js';
+
 
 const router = Router();
 
-router.post('/like/:postId',
-    validationToken,
+router.post('/like/:postId/user/:userId',
     middleware.likes,
     controllers.postLikes
 );
 
-router.delete('/like/:postId',
-    validationToken,
+router.delete('/like/:postId/user/:userId',
     middleware.likes,
     controllers.deleteLikes
 );
 
 
-router.get('/like/:postId/me',
-    validationToken,
+router.get('/like/:postId/user/:userId',
     middleware.likes,
     controllers.getLikeMe
 );

@@ -6,7 +6,6 @@ async function seachUser(req, res) {
     if (nameUser.length < 3) {
       return res.send([]);
     }
-    
     const users = await seachNames(nameUser);
     
     return res.send(users.rows);
