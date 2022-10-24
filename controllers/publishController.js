@@ -11,18 +11,18 @@ export async function postPublish(req, res) {
     if (!url.match(validationURL)) {
       return res.status(422).send("URL invalida!");
     }
-    const {rows: publishConfirm} = await publishRepository.postPublishPostByUserId(userId, url, complement);
+    const { rows: publishConfirm } = await publishRepository.postPublishPostByUserId(userId, url, complement);
     const postId = publishConfirm[0].id;
 
-    if(topics.legth > 0){
+    if (topics.legth > 0) {
       topics.forEach(async topicName => {
         const existinHashtag = await findHashtagByName(topicName);
 
-        if(existinHashtag.legth > 0) {
+        if (existinHashtag.legth > 0) {
           createPostWithaHashtag(postId, existinHashtag[0].id)
         }
 
-        else{
+        else {
           const publishConfirm = await createNewHashtag(topicName)
           const topicId = publishConfirm[0].id;
           createPostWithaHashtag(postId, topicId);
@@ -36,20 +36,20 @@ export async function postPublish(req, res) {
   }
 }
 
-export async function getPublish(req,res){
+export async function getPublish(req, res) {
   const user = res.locals.user;
   try {
     const posts = await publishRepository.getPublish();
-    res.send({posts: posts.rows, user: user});
+    res.send({ posts: posts.rows, user: user });
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
 }
 
-export async function getPublishById(req,res){
+export async function getPublishById(req, res) {
   const id = parseInt(req.params.id);
-  if(isNaN(id)){
+  if (isNaN(id)) {
     res.sendStatus(STATUS_CODE.BAD_REQUEST)
     return;
   }
@@ -62,6 +62,6 @@ export async function getPublishById(req,res){
   }
 }
 
-export async function updatePublish(req,res){
+export async function updatePublish(req, res) {
 
 }
