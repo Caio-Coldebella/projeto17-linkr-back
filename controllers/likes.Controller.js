@@ -8,7 +8,7 @@ async function postLikes(req, res) {
     const { userId } = req.params;
 
     const postId = res.locals.postId;
-
+  
     try {
 
         const response = await repository.insertPostLike(postId, userId);
