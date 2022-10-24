@@ -8,9 +8,9 @@ async function postPublishPostByUserId(userId, link, content) {
   );
 }
 
-async function getPublish(){
+async function getPublish() {
   return db.query(`SELECT ${TABLES_NAMES.POSTS}.content, ${TABLES_NAMES.POSTS}.link, ${TABLES_NAMES.USERS}.username,${TABLES_NAMES.USERS}."pictureUrl" FROM ${TABLES_NAMES.POSTS} JOIN ${TABLES_NAMES.USERS} ON ${TABLES_NAMES.POSTS}."userId"=${TABLES_NAMES.USERS}.id`);
 }
 
-const publishRepository = { postPublishPostByUserId, getPublish} ;
+const publishRepository = { postPublishPostByUserId, getPublish };
 export default publishRepository;
