@@ -5,7 +5,8 @@ import * as repository from '../repositories/likes.Repository.js'
 async function postLikes(req, res) {
 
 
-    const { id: userId } = res.locals.user[0];
+    const { userId } = req.params;
+
     const postId = res.locals.postId;
 
     try {
@@ -28,8 +29,10 @@ async function postLikes(req, res) {
 async function deleteLikes(req, res) {
 
 
-    const { id: userId } = res.locals.user[0];
+    const { userId } = req.params;
+
     const postId = res.locals.postId;
+
 
     try {
 
@@ -49,7 +52,8 @@ async function deleteLikes(req, res) {
 
 async function getLikeMe(req, res) {
 
-    const { id: userId } = res.locals.user[0];
+    const { userId } = req.params;
+
     const postId = res.locals.postId;
 
     try {
