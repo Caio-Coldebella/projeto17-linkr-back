@@ -1,3 +1,4 @@
+
 import db from '../database/database.js';
 
 export async function findHashtag() {
@@ -23,7 +24,7 @@ export async function findHashtagByName(topicName){
 export async function findPostWithHashtag(topicId){
     const {rows: postsResults} = await db.query(`
     SELECT
-    posts.id AS id, posts.text AS text, post.link AS link, users.id AS "userId" 
+    posts.id AS id, posts.content AS text, post.link AS link, users.id AS "userId" 
     FROM posts
     JOIN "topicsPosts" ON "topicsPosts"."postId" = posts.id
     JOIN users ON posts."userId" = users.id
@@ -47,3 +48,5 @@ export async function createNewHashtag(topicName) {
     VALUES ($1) RETURNING id`, [topicName]);
     return newHashtag;
 }
+
+

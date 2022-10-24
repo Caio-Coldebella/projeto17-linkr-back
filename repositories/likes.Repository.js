@@ -1,5 +1,6 @@
 import db from "../database/database.js";
 import { TABLES_NAMES } from '../enums/tableNames.Enum.js'
+
 async function selectPost(postId) {
 
   return db.query(`
@@ -25,7 +26,7 @@ async function insertPostLike(postId, userId) {
 async function deletePostLike(postId, userId) {
 
   return db.query(`DELETE FROM
-                    "likesUsers"
+                    "${TABLES_NAMES.LIKES_USERS}"
                   WHERE
                     "postId" = $1
                     AND "userId" = $2;`,
@@ -33,10 +34,21 @@ async function deletePostLike(postId, userId) {
 
 }
 
+async function selectLikeMe(postId, userId) {
+
+  return db.query(`SELECT * FROM
+                   "${TABLES_NAMES.LIKES_USERS}"
+                  WHERE
+                    "postId" = $1 AND "userId" = $2
+                  limit 1;`,
+                  [postId, userId]);
+
+}
+
 async function selectLikesUsers(postId) {
 
   return db.query(`SELECT
-                    users.username
+                    ${TABLES_NAMES.USERS}.username
                   from
                     users
                     INNER JOIN "likesUsers" as lu ON  lu."userId" = users.id
@@ -52,7 +64,7 @@ async function selectCountLike(postId) {
                    FROM
                      "likesUsers" as lu
                    WHERE
-                     lu."postId" = $1;`,[postId]);
+                     lu."postId" = $1;`, [postId]);
 
 }
 
@@ -61,6 +73,7 @@ export {
   selectPost,
   insertPostLike,
   deletePostLike,
+  selectLikeMe,
   selectLikesUsers,
   selectCountLike
 };

@@ -2,7 +2,7 @@ import db from "../database/database.js";
 
 async function validationToken(req, res, next) {
   const token = req.headers.authorization?.replace("Bearer ", "");
-
+  
   try {
     if (!token) {
       return res.status(401).send("Token not found!");

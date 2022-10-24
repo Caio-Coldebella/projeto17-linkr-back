@@ -17,8 +17,15 @@ function serverError(res, error) {
 }
 
 
-export { 
+function badRequest(res) {
+
+    return res.sendStatus(STATUS_CODE.BAD_REQUEST);
+
+}
+
+export {
     notImplemented,
     notFound,
-    serverError
- };
+    serverError,
+    badRequest
+};
