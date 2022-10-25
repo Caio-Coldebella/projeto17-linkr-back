@@ -82,7 +82,7 @@ async function getLikesUsers(req, res) {
 
         const response = await repository.selectLikesUsers(postId);
 
-        if (response.rowCount) {
+        if (response.rowCount || response.rowCount === 0) {
             return helper.okResponseBody(res, response.rows.map(res => res.username));
         }
 
