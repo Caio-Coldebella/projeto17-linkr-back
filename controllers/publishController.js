@@ -11,10 +11,11 @@ export async function postPublish(req, res) {
     if (!url.match(validationURL)) {
       return res.status(422).send("URL invalida!");
     }
-    const { rows: publishConfirm } = await publishRepository.postPublishPostByUserId(userId, url, complement);
-    const postId = publishConfirm[0].id;
+    const publishConfirm = await publishRepository.postPublishPostByUserId(userId, url, complement);
+    const postId = (await publishRepository.getPublish()).rows[0].id;
+    console.log(postId)
 
-    if (topics.legth > 0) {
+    if (topics && topics.length > 0) {
       topics.forEach(async topicName => {
         const existinHashtag = await findHashtagByName(topicName);
 
