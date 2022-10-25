@@ -13,7 +13,6 @@ export async function postPublish(req, res) {
     }
     const publishConfirm = await publishRepository.postPublishPostByUserId(userId, url, complement);
     const postId = (await publishRepository.getPublish()).rows[0].id;
-    console.log(postId)
 
     if (topics && topics.length > 0) {
       topics.forEach(async topicName => {
