@@ -22,5 +22,21 @@ export async function postcommentController(req,res){
 }
 
 export async function getcommentController(req,res){
-    return null;
+    const postid = parseInt(req.params.postid);
+    if(isNaN(postid)){
+        res.sendStatus(STATUS_CODE.BAD_REQUEST);
+        return;
+    }
+    try {
+        const post = (await repo.getPostExists(postid)).rows;
+        if(post == undefined || post.length === 0){
+            res.sendStatus(STATUS_CODE.NOT_FOUND);
+            return;
+        }
+        const comments = await repo.getCommentOfPost(postid);
+        res.send(comments.rows);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(STATUS_CODE.SERVER_ERROR)
+    }
 }
