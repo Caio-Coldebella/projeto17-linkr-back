@@ -1,9 +1,20 @@
 import publishRepository from "../repositories/publishRepository.js";
 import { findHashtagByName, createPostWithaHashtag, createNewHashtag } from "../repositories/hashtagRepository.js";
 
+
+function filterTopics(string){
+  const topicList = string.split("").filter((tag) => tag[0] === "#" && tag.legth>1)
+  .map((tag) => tag.slice(1));
+
+  return topicList.filter((tag, index) => topicList.indexOf(tag) === index);
+}
 export async function postPublish(req, res) {
-  const { url, complement, topics } = req.body;
+  const { url, complement } = req.body;
   const userId = res.locals.user[0].id;
+  let topics = [];
+  if(complement) {
+    topics = filterTopics(complement);
+  }
   try {
 
     const validationURL =
@@ -14,19 +25,17 @@ export async function postPublish(req, res) {
     const publishConfirm = await publishRepository.postPublishPostByUserId(userId, url, complement);
     const postId = (await publishRepository.getPublish()).rows[0].id;
 
-    if (topics && topics.length > 0) {
-      topics.forEach(async topicName => {
-        const existinHashtag = await findHashtagByName(topicName);
-
-        if (existinHashtag.legth > 0) {
-          createPostWithaHashtag(postId, existinHashtag[0].id)
+    if(topics.legth) {
+      await topics.forEach(async (topic)=> {
+        let topicId = await findHashtagByName(topic);
+        if(!topicId?.rows.legth){
+          topicId = await createNewHashtag(topic);
         }
-
-        else {
-          const publishConfirm = await createNewHashtag(topicName)
-          const topicId = publishConfirm[0].id;
-          createPostWithaHashtag(postId, topicId);
-        }
+        await createPostWithaHashtag({
+          post: postId?.rows[0]?.id,
+          topic: topicId?.rows[0]?.id,
+        });
+        
       });
     }
     res.sendStatus(200);
