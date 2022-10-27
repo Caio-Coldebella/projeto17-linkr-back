@@ -6,13 +6,15 @@ import * as repository from '../repositories/update.Reposity.js';
 async function validPost(req, res, next) {
 
     const { id } = req.params;
-    const { content } = req.body;
-    
+    const { content, userId } = req.body;
+
     try {
 
-        if (!content) {
+        if (!content || !userId) {
             helper.badRequest(res);
         }
+
+
 
         const confirmPost = await repository.selectPost(id);
 
@@ -20,8 +22,8 @@ async function validPost(req, res, next) {
             helper.notFound(res);
         }
 
-        res.locals.id = id;
-        res.locals.content = content;
+
+        res.locals.edit = { id, userId, content };
         next();
     } catch (error) {
         return helper.serverError(res, error);
