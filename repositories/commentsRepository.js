@@ -13,8 +13,12 @@ async function postCommentPosts(commentid,postid){
     return db.query(`INSERT INTO "${TB.COMMENTSPOSTS}" ("commentId","postId") VALUES ($1,$2)`,[commentid,postid]);
 }
 
-async function getCommentOfPost(){
-    return db.query();
+async function getCommentOfPost(postid){
+    return db.query(`SELECT ${TB.COMMENTS}."userId", ${TB.COMMENTS}.comment FROM "${TB.COMMENTSPOSTS}" JOIN ${TB.COMMENTS} ON "${TB.COMMENTSPOSTS}"."commentId"="${TB.COMMENTS}".id WHERE "${TB.COMMENTSPOSTS}"."postId"=$1`,[postid]);
 }
 
-export const commentsRepository = {postComment, getCommentOfPost,getCommentId, postCommentPosts};
+async function getPostExists(postid){
+    return db.query(`SELECT * FROM ${TB.POSTS} WHERE id=$1`,[postid])
+}
+
+export const commentsRepository = {postComment, getCommentOfPost,getCommentId, postCommentPosts,getPostExists};
