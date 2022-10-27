@@ -3,7 +3,7 @@ import { findHashtagByName, createPostWithaHashtag, createNewHashtag } from "../
 
 
 function filterTopics(string){
-  const topicList = string.split("").filter((tag) => tag[0] === "#" && tag.legth>1)
+  const topicList = string.split(" ").filter((tag) => tag[0] === "#" && tag.length>1)
   .map((tag) => tag.slice(1));
 
   return topicList.filter((tag, index) => topicList.indexOf(tag) === index);
@@ -25,7 +25,7 @@ export async function postPublish(req, res) {
     const publishConfirm = await publishRepository.postPublishPostByUserId(userId, url, complement);
     const postId = (await publishRepository.getPublish()).rows[0].id;
 
-    if(topics.legth) {
+    if(topics.length) {
       await topics.forEach(async (topic)=> {
         let topicId = await findHashtagByName(topic);
         if(!topicId?.rows.legth){
