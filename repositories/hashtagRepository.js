@@ -20,6 +20,7 @@ export async function findHashtagByName(topicName){
     return topicResults
 }
 
+
 export async function findPostWithHashtag(topicId){
     const {rows: postsResults} = await db.query(`
     SELECT
