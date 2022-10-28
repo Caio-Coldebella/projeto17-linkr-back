@@ -20,7 +20,7 @@ export async function findHashtagByName(topicName){
 
 export async function findPostWithHashtag(topicId){
     const {rows: postsResults} = await db.query(`
-    SELECT posts.* FROM "topicsPosts" INNER JOIN "posts" ON "posts"."id" = "topicsPosts"."postId" WHERE "topicsPosts"."topicId" = $1;
+    SELECT users."pictureUrl",users.username,posts.*,topics.name FROM "topicsPosts" INNER JOIN "posts" ON "posts"."id" = "topicsPosts"."postId" JOIN users ON posts."userId"=users.id JOIN topics ON "topicsPosts"."topicId"=topics.id WHERE "topicsPosts"."topicId" = $1;
     `, [topicId]);
     return postsResults
 }
