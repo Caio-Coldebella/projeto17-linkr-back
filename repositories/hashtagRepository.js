@@ -2,12 +2,9 @@ import db from '../database/database.js';
 
 export async function findHashtag() {
     const {rows: topicResults} = await db.query(`
-    SELECT "topicId", topics.name, COUNT("topicId") as "existinPosts"
-    FROM * "topicPosts" JOIN topics
-    ON topics.id = "topicsPosts", "topicId"
-    GROUP BY "topicId", topics.name
-    ORDER BY "existinPosts" DESC
-    LIMIT 10
+    SELECT topics.*, COUNT("topicsPosts"."topicId") as "existingPosts" FROM 
+    "topicsPosts" JOIN topics ON "topicsPosts"."topicId"=topics.id GROUP BY
+     ("topics"."id") ORDER BY "existingPosts" DESC LIMIT 10;    
     `);
 
     return topicResults
@@ -36,7 +33,7 @@ export async function findPostWithHashtag(topicId){
 
 export async function createPostWithaHashtag(postId, topicId){
     const {rows: newPost} = await db.query(`
-    INSERT INTO "topicsPosts" ("postsId", "topicId")
+    INSERT INTO "topicsPosts" ("postId", "topicId")
     VALUES ($1, $2)
     `, [postId, topicId]);
     return newPost

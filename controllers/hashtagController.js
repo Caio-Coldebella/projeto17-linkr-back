@@ -3,10 +3,10 @@ import { findHashtag, findHashtagByName, findPostWithHashtag } from "../reposito
 export async function findHashtagController(req, res) {
     try {
         const listHashtags = await findHashtag();
-
-        return res.status(200).send(listHashtags);
+        res.send(listHashtags);
     } catch (error) {
-        return res.status(500).send(error)
+        console.log(error)
+        res.sendStatus(500)
     }
 }
 
@@ -16,14 +16,14 @@ export async function findHashtagIdController(req, res) {
     try {
         const checkHashtag = await findHashtagByName(hashtag);
         if (checkHashtag.length < 1) {
-            return res.sendStatus(404);
+            res.sendStatus(404);
         }
 
         const postsList = await findPostWithHashtag(checkHashtag[0].id);
 
-        return res.status(200).send(postsList);
+        res.status(200).send(postsList);
 
     } catch (error) {
-        return res.sendStatus(500);
+        res.sendStatus(500);
     }
 }

@@ -6,7 +6,6 @@ import * as controller from "../controllers/update.Contoller.js";
 const router = Router();
 
 router.put('/post/:id',
-    validationToken,
     middleware.validPost,
     controller.updatePost
 );

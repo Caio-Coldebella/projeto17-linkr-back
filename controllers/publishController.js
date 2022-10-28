@@ -5,7 +5,6 @@ import { findHashtagByName, createPostWithaHashtag, createNewHashtag } from "../
 function filterTopics(string){
   const topicList = string.split(" ").filter((tag) => tag[0] === "#" && tag.length>1)
   .map((tag) => tag.slice(1));
-
   return topicList.filter((tag, index) => topicList.indexOf(tag) === index);
 }
 export async function postPublish(req, res) {
@@ -24,18 +23,13 @@ export async function postPublish(req, res) {
     }
     const publishConfirm = await publishRepository.postPublishPostByUserId(userId, url, complement);
     const postId = (await publishRepository.getPublish()).rows[0].id;
-
-    if(topics.length) {
+    if(topics.length>0) {
       await topics.forEach(async (topic)=> {
         let topicId = await findHashtagByName(topic);
-        if(!topicId?.rows.legth){
+        if(topicId?.length === 0){
           topicId = await createNewHashtag(topic);
         }
-        await createPostWithaHashtag({
-          post: postId?.rows[0]?.id,
-          topic: topicId?.rows[0]?.id,
-        });
-        
+        await createPostWithaHashtag(postId,topicId[0].id) 
       });
     }
     res.sendStatus(200);
