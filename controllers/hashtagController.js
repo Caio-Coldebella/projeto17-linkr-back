@@ -20,8 +20,8 @@ export async function findHashtagIdController(req, res) {
             console.log("erro1")
         }
 
-        const postsList = await findPostWithHashtag();
-        console.log("erro2")
+        const postsList = await findPostWithHashtag(hashtag);
+       
 
         res.status(200).send(postsList);
 
