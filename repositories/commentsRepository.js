@@ -14,7 +14,7 @@ async function postCommentPosts(commentid,postid){
 }
 
 async function getCommentOfPost(postid){
-    return db.query(`SELECT ${TB.COMMENTS}."userId", ${TB.COMMENTS}.comment FROM "${TB.COMMENTSPOSTS}" JOIN ${TB.COMMENTS} ON "${TB.COMMENTSPOSTS}"."commentId"="${TB.COMMENTS}".id WHERE "${TB.COMMENTSPOSTS}"."postId"=$1`,[postid]);
+    return db.query(`SELECT ${TB.COMMENTS}."userId",${TB.COMMENTS}.comment,${TB.USERS}.username,${TB.USERS}."pictureUrl" FROM "CommentsPosts" JOIN ${TB.COMMENTS} ON "CommentsPosts"."commentId"=${TB.COMMENTS}.id JOIN ${TB.USERS} ON ${TB.COMMENTS}."userId"=${TB.USERS}.id WHERE "CommentsPosts"."postId"=$1`,[postid]);
 }
 
 async function getPostExists(postid){
