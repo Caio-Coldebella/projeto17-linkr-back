@@ -17,9 +17,11 @@ export async function findHashtagIdController(req, res) {
         const checkHashtag = await findHashtagByName(hashtag);
         if (checkHashtag.length < 1) {
             res.sendStatus(404);
+            console.log("erro1")
         }
 
-        const postsList = await findPostWithHashtag(checkHashtag[0].id);
+        const postsList = await findPostWithHashtag();
+        console.log("erro2")
 
         res.status(200).send(postsList);
 

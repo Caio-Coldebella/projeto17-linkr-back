@@ -12,7 +12,7 @@ export async function findHashtag() {
 
 export async function findHashtagByName(topicName){
     const {rows: topicResults} = await db.query(`
-    SELECT id FROM topics WHERE topics.name = $1;
+    SELECT posts.* FROM "topicsPosts" INNER JOIN "posts" ON "posts"."id" = "topicsPosts"."postId" WHERE "topicsPosts"."topicId" = $1;
     `, [topicName]);
     return topicResults
 }
@@ -20,13 +20,8 @@ export async function findHashtagByName(topicName){
 
 export async function findPostWithHashtag(topicId){
     const {rows: postsResults} = await db.query(`
-    SELECT
-    posts.id AS id, posts.content AS text, post.link AS link, users.id AS "userId" 
-    FROM posts
-    JOIN "topicsPosts" ON "topicsPosts"."postId" = posts.id
-    JOIN users ON posts."userId" = users.id
-    WHERE "topicsPosts"."topicId" = $1
-    LIMIT 20
+    SELECT ("postId".*) FROM "topicsPosts";
+    
     `, [topicId]);
     return postsResults
 }
